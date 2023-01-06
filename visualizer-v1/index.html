@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="./css/index.css">
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Quads Visualizer</title>
+	</head>
+
+	<body>
+		<h1>Quads Visualizer</h1>
+
+		<form class="input">
+			<textarea style="width: 400px" id="inputBox" name="input"></textarea><br>
+			<button id="combinationsOne">combinationsOne</button>
+			<button id="dynamicOne">dynamicOne</button>
+			<button id="visualize">visualize</button>
+			<button id="calculate">calculate</button>
+		</form>
+
+		<div id="canvas">
+			enter quad string and it will be displayed here
+		</div>
+
+		<script src="./js/source/jquery.js"></script>
+		<script type="module">
+			import { combinationsOneHandler } from './js/handlers/combinationsOneHandler.js';
+			document.getElementById("combinationsOne").onclick = function () {
+
+				//draw new canvas
+				const input = document.getElementById("inputBox").value
+				try{
+					combinationsOneHandler(input)
+				}catch(err){
+					console.error(err)
+				}
+				return false
+			};
+		</script>
+
+
+		<script type="module">
+			import { dynamicOneHandler } from './js/handlers/dynamicOneHandler.js';
+			document.getElementById("dynamicOne").onclick = function () {
+				//remove old canvas
+				$('#canvas').empty()
+				
+				//draw new canvas
+				const input = document.getElementById("inputBox").value
+				try{
+					dynamicOneHandler(input)
+				}catch(err){
+					console.error(err)
+				}
+				return false
+			};
+		</script>
+
+		<script type="module">
+			import { visualizationHandler } from './js/handlers/visualizationHandler.js';
+			document.getElementById("visualize").onclick = function () {
+				//remove old canvas
+				$('#canvas').empty()
+
+				//draw new canvas
+				const input = document.getElementById("inputBox").value
+				try{
+					visualizationHandler(input)
+				}catch(err){
+					console.error(err)
+				}
+				return false
+			};
+		</script>
+
+		<script type="module">
+			import { custom } from './js/run.js';
+			document.getElementById("calculate").onclick = function () {
+				//remove old canvas
+				$('#canvas').empty()
+				
+				//draw new canvas
+				const input = document.getElementById("inputBox").value
+				try{
+					custom(input)
+				}catch(err){
+					console.error(err)
+				}
+				return false
+			};
+		</script>
+	</body>
+</html>
