@@ -1,5 +1,8 @@
 name: Build & deploy
 
+env:
+  CI: false
+
 on:
   push:
     branches:
