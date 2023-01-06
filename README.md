@@ -1,9 +1,6 @@
-# quads
-
-## Quads Visualizer
+# Quads Visualizer
 The Quads Visualizer is a frontend webapp using react. To run it locally, please execute the following commands
 ```
-cd code
 cd visualizer-v2
 npm start
 ```
