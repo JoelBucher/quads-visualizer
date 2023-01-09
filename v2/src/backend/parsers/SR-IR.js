@@ -13,7 +13,7 @@ export function SRtoIR(input){
 
 function SRtoSIR(input){
     var status = "success"
-    var regex = /(([0-9]+),)([0-9]+),([0-9]+)-([xyz])([0123])-(([a-z])+|([0-9]+))/g;
+    var regex = /(([0-9]+),)([0-9]+),([0-9]+)\/([xyz])([0123])\/(([a-z])+|([0-9]+))/g;
     var pos, str, rot = null
 
     if(regex.test(input)){
@@ -21,8 +21,8 @@ function SRtoSIR(input){
         rot = parseRotation(input)
         str = parseStructure(input)
 
-        if(str.size <= 2){
-            status = "quads must have at least size 3"
+        if(str.size < 1){
+            status = "quads must have at least size 1"
             pos = str = rot = null
         }else if(pos == null){
             status = "quads position must be in 2D or 3D space"
@@ -37,7 +37,7 @@ function SRtoSIR(input){
 function skipDash(input, skips){
     var index = 0;
     for(var i = 0; i <= skips; i++){
-        while(input[index]!='-'){index++;}
+        while(input[index]!='/'){index++;}
         index++;
     }
     return index;
@@ -61,7 +61,7 @@ function parseStructure(input){
 
     if(colorVals.length == 0){
         //if color vals array is empty, parse it as an integer
-        length = parseInt(input.slice(index, input.length))
+        length = parseInt(input.slice(index, input.length))+2
 
         //fill color array with gray values
         for(var i=0; i<length; i++){

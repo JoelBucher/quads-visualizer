@@ -1,3 +1,4 @@
+
 import { getColorHEX } from './fibreHelper.js';
 import { SO } from '../../frontend/classes/SO.js';
 
@@ -37,7 +38,7 @@ function buildFromSIR(SIR, i, updateClick, click, centerPoint, zoom){
     var rotationArr;
     switch(axis){
         case 'x':
-            rotationArr = [(Math.PI/2.0)*degree, 0, (Math.PI/2.0)*3]; break;
+            rotationArr = [(Math.PI/2.0)*degree, 0, 0]; break;
         case 'y':
             rotationArr = [0,(Math.PI/2.0) * degree, 0]; break;
         case 'z':
@@ -75,23 +76,23 @@ function buildTiles(SIR, groupID, updateClick, click){
         //bottom tile
         if(s==0){
             tileColor = getColorHEX(colors[s])
-            tilePos = [0,s - 0.5, 0]
-            tileGeometry = [1-thk, thk, 1-thk]
-            whitePos = [0,s - 0.5, 0.5]
+            tilePos = [s - 0.5, 0, 0]
+            tileGeometry = [thk, 1-thk, 1-thk]
+            whitePos = [s - 0.5, 0.5, 0]
 
         //top tile
         }else if(s+1==size){
             tileColor = getColorHEX(colors[s])
-            tilePos = [0,s - 1.5, 0]
-            tileGeometry = [1-thk, thk, 1-thk]
-            whitePos = [0,s - 1.5, 0.5]
+            tilePos = [s - 1.5, 0, 0]
+            tileGeometry = [thk, 1-thk, 1-thk]
+            whitePos = [s - 1.5, 0.5, 0]
 
         //tiles in between
         }else{
             tileColor = getColorHEX(colors[s])
-            tilePos = [0,s - 1, 0.5]
-            tileGeometry = [1-thk, 1-thk, thk]
-            whitePos = [0,s - 1.5, 0.5]
+            tilePos = [s - 1, 0.5,0]
+            tileGeometry = [1-thk, thk, 1-thk]
+            whitePos = [s - 1.5, 0.5,0]
         }
 
         const thisID = groupID*(size+1) + s + size
@@ -140,7 +141,7 @@ function buildTiles(SIR, groupID, updateClick, click){
                 key = {whiteID}
                 position={whitePos}>
                 <meshStandardMaterial color='white'/>
-                <boxGeometry args={[1-thk,thk,thk]}/>
+                <boxGeometry args={[thk,thk,1-thk]}/>
             </mesh>
         )
     }
