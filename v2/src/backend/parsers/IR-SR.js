@@ -8,7 +8,7 @@ export function IRtoSR(ir){
 
         var cStr = ""
         if(colors[0] === "x"){
-            cStr += colors.length
+            cStr += colors.length - 2
         }else{
             for(var i=0; i<colors.length; i++){
                 cStr += colors[i]
@@ -24,7 +24,7 @@ export function IRtoSR(ir){
             }
         }
         
-        SR += '('+pStr+'-'+ axis + degree + '-' + cStr +')'
+        SR += '('+pStr+'/'+ axis + degree + '/' + cStr +')'
     }
     return SR
 }

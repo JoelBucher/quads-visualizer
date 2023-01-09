@@ -40,9 +40,17 @@ function buildFromSIR(SIR, i, updateClick, click, centerPoint, zoom){
         case 'x':
             rotationArr = [(Math.PI/2.0)*degree, 0, 0]; break;
         case 'y':
-            rotationArr = [0,(Math.PI/2.0) * degree, 0]; break;
+            rotationArr = [0,(Math.PI/2.0) * degree, (Math.PI/2.0)]; break;
         case 'z':
-            rotationArr = [Math.PI/2.0, (Math.PI/2.0) * degree, 0]; break;
+            if(degree == 0){
+                rotationArr = [0,3*(Math.PI/2.0), 0]; break;
+            }else if(degree == 1){
+                rotationArr = [(Math.PI/2.0),0,(Math.PI/2.0)]; break;
+            }else if(degree == 2){
+                rotationArr = [2*(Math.PI/2.0),(Math.PI/2.0),0]; break;
+            }else{
+                rotationArr = [3*(Math.PI/2.0),0,3*(Math.PI/2.0)]; break;
+            }
     }
     return (
         <group

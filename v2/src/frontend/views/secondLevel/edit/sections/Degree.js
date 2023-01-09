@@ -15,11 +15,11 @@ export function EditDegree(props){
         
         switch(axis){
             case 'x':
-                return {0: 'front', 1: 'down', 2: 'back', 3: 'up'}
+                return {0: 'up', 1: 'front', 2: 'down', 3: 'back'}
             case 'y':
-                return {0: 'front', 1: 'right', 2: 'back', 3: 'left'}
+                return {0: 'left', 1: 'front', 2: 'right', 3: 'back'}
             case 'z':
-                return {0: 'down', 1: 'right', 2: 'up', 3: 'left'}
+                return {0: 'up', 1: 'left', 2: 'down', 3: 'right'}
         }
     }
 

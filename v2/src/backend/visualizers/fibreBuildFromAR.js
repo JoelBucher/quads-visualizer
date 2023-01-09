@@ -14,19 +14,30 @@ export function fibreBuildFromAR(ar){
                 var tileGeometry
 
                 if(corner.bottom[0] != null){
-                    tilePos = [x + 0.5, y + 0, z + 0.5]
+                    tilePos = [
+                        x + 0.5     + ar.translateX,
+                        y + 0       + ar.translateY,
+                        z + 0.5     + ar.translateZ
+                    ]
                     tileGeometry = [0.9, 0.1, 0.9]
                     tiles = addTile(tiles, key, tilePos, tileGeometry, corner.bottom[0])
                 }
 
                 if(corner.back[0] != null){
-                    tilePos = [x + 0.5, y + 0.5, z + 0]
+                    tilePos = [
+                        x + 0.5     + ar.translateX,
+                        y + 0.5     + ar.translateY,
+                        z + 0       + ar.translateZ]
                     tileGeometry = [0.9, 0.9, 0.1]
                     tiles = addTile(tiles, key, tilePos, tileGeometry, corner.back[0])
                 }
 
                 if(corner.left[0] != null){
-                    tilePos = [x + 0, y + 0.5, z + 0.5]
+                    tilePos = [
+                        x + 0       + ar.translateX,
+                        y + 0.5     + ar.translateY,
+                        z + 0.5     + ar.translateZ
+                    ]
                     tileGeometry = [0.1, 0.9, 0.9]
                     tiles = addTile(tiles, key, tilePos, tileGeometry, corner.left[0])
                 }

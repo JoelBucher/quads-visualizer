@@ -9,13 +9,20 @@ export function InfoView(props){
     function segmentedContent(){
         switch(window){
             case 'compliance':
-                var unique = "no"
-                if(props.ir.uniqueQuads()){unique = "yes"}
+                var unique;
+                if(props.ir.uniqueQuads()){
+                    unique = "yes"
+                }else{
+                    unique = "no"
+                }
+
+                const irCopy = props.ir.clone()
                 return (
                 <>
-                    <h3 style={{marginTop: 10}}>Score: {IRtoAR(props.ir).score()}</h3>
-                    <h3 style={{marginTop: 10}}>Size: {props.ir.size()}</h3>
-                    <h3 style={{marginTop: 10}}>Unique Quads: {unique}</h3>
+                    <h3 style={{marginTop: 10}}>Color Score: {props.ir.colorScore()}</h3>
+                    <h3 style={{marginTop: 10}}>Theoretical Score: {props.ir.theoreticalScore()}</h3>
+                    <h3 style={{marginTop: 10}}>Structure Size: {props.ir.size()}</h3>
+                    <h3 style={{marginTop: 10}}>Valid Coloring: {unique}</h3>
                 </>)
             case 'exports':
                 return(

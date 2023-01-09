@@ -11,12 +11,7 @@ export default function QuadsScene(props) {
     // use non-state variable to keep track of click updates
     var c = new SO()
     const fibreList = fibreBuildFromIR(props.ir, updateClick, props.so, props.zoom)
-
-    /*
-    var ar = IRtoAR(props.ir)
-    var fibreList = fibreBuildFromAR(ar)
-    console.log("score "+ar.score())
-    */
+    //const fibreList = fibreBuildFromAR(IRtoAR(props.ir))
     
 
     function updateClick(so){

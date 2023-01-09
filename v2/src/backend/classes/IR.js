@@ -1,3 +1,5 @@
+import { IRtoAR } from "../parsers/IR-AR"
+
 export class IR{
     constructor(){
         const max = Number.MAX_SAFE_INTEGER
@@ -75,6 +77,14 @@ export class IR{
             if(t!=this.list[i].size()){return -1}
         }
         return t
+    }
+
+    maxDominoSize(){
+        var max = 0
+        for(var i=0; i<this.size(); i++){
+            max = Math.max(max,this.get(i).size())
+        }
+        return max
     }
 
     setSIRlist(list){
@@ -225,6 +235,17 @@ export class IR{
             this.list[i] = this.list[i].removeColors()
         }
         return this
+    }
+
+    theoreticalScore(){
+        const clone = this.clone()
+        const noColors = clone.removeColors()
+        const theoreticalScore = IRtoAR(noColors).score()
+        return theoreticalScore
+    }
+
+    colorScore(){
+        return IRtoAR(this).score()
     }
 
 

@@ -53,18 +53,4 @@ export class AR {
 
         return this.onTileMatch(accVar, accFun)
     }
-
-    /*
-    score(){
-        var score = 0
-        for(var x=0; x<this.X; x++){
-            for(var y=0; y<this.Y; y++){
-                for(var z=0; z<this.Z; z++){
-                    score += this.array[x][y][z].score()
-                }
-            }
-        }
-        return score
-    }
-    */
 }

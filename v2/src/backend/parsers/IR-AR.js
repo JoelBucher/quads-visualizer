@@ -8,12 +8,16 @@ import { IRtoSR } from './IR-SR.js'
 
 export function IRtoAR(IR){
     //initialize array
-    var array = new AR(IR.dimension[0]+5, IR.dimension[1]+5, IR.dimension[2]+5, IR.size())
-
+    var maxDomino = IR.maxDominoSize()
+    var array = new AR(
+        IR.dimension[0]+maxDomino,
+        IR.dimension[1]+maxDomino,
+        IR.dimension[2]+maxDomino,
+        IR.size())
     //set AR translation offsets
-    array.translateX = IR.minCorner[0]
-    array.translateY = IR.minCorner[1]
-    array.translateZ = IR.minCorner[2]
+    array.translateX = parseInt(IR.minCorner[0])
+    array.translateY = parseInt(IR.minCorner[1])
+    array.translateZ = parseInt(IR.minCorner[2])
 
     //add quads to array
     for(var i = 0; i<IR.size(); i++){
@@ -22,10 +26,9 @@ export function IRtoAR(IR){
         const deg = IR.get(i).rotation.degree
         const col = IR.get(i).structure.colors
 
-        var x = pos[0]
-        var y = pos[1]
-        var z = pos[2]
-        var arr = array.array
+        var x = pos[0]-array.translateX
+        var y = pos[1]-array.translateY
+        var z = pos[2]-array.translateZ
 
         for(var s=0; s<col.length; s++){
             switch(axis){
@@ -47,16 +50,16 @@ export function IRtoAR(IR){
                 }else{
                     switch(deg){
                         case '0':
-                            array.array[x+s-1][y][z+1].addBack(tile)
+                            array.array[x+s-1][y+1][z].addBottom(tile)
                             break;
                         case '1':
-                            array.array[x+s-1][y][z].addBottom(tile)
+                            array.array[x+s-1][y][z+1].addBack(tile)
                             break;
                         case '2':
-                            array.array[x+s-1][y][z].addBack(tile)
+                            array.array[x+s-1][y][z].addBottom(tile)
                             break;
                         case '3':
-                            array.array[x+s-1][y+1][z].addBottom(tile)
+                            array.array[x+s-1][y][z].addBack(tile)
                             break;
 
                     }
@@ -73,16 +76,16 @@ export function IRtoAR(IR){
                 }else{
                     switch(deg){
                         case '0':
-                            array.array[x][y+s-1][z+1].addBack(tile)
+                            array.array[x][y+s-1][z].addLeft(tile)
                             break;
                         case '1':
-                            array.array[x+1][y+s-1][z].addLeft(tile)
+                            array.array[x][y+s-1][z+1].addBack(tile)
                             break;
                         case '2':
-                            array.array[x][y+s-1][z].addBack(tile)
+                            array.array[x+1][y+s-1][z].addLeft(tile)
                             break;
                         case '3':
-                            array.array[x][y+s-1][z].addLeft(tile)
+                            array.array[x][y+s-1][z].addBack(tile)
                             break;
 
                     }
@@ -99,16 +102,16 @@ export function IRtoAR(IR){
                 }else{
                     switch(deg){
                         case '0':
-                            array.array[x][y][z+s-1].addBottom(tile)
-                            break;
-                        case '1':
-                            array.array[x+1][y][z+s-1].addLeft(tile)
-                            break;
-                        case '2':
                             array.array[x][y+1][z+s-1].addBottom(tile)
                             break;
-                        case '3':
+                        case '1':
                             array.array[x][y][z+s-1].addLeft(tile)
+                            break;
+                        case '2':
+                            array.array[x][y][z+s-1].addBottom(tile)
+                            break;
+                        case '3':
+                            array.array[x+1][y][z+s-1].addLeft(tile)
                             break;
 
                     }
