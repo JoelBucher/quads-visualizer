@@ -69,6 +69,35 @@ export function WindowView(props){
         }
     }
 
+    function selectQuadsScene(){
+        switch(props.window){
+            case 1:
+                return(
+                <QuadsScene
+                    ir = {coloredIR()}
+                    so = {so}
+                    updateSO = {updateSO}
+                    zoom = {props.zoom}
+                />)
+            case 2:
+                return(
+                    <QuadsScene
+                        ir = {coloredIR()}
+                        so = {so}
+                        updateSO = {null}
+                        zoom = {props.zoom}
+                    />)
+            default:
+                return(
+                    <QuadsScene
+                        ir = {coloredIR()}
+                        so = {so}
+                        updateSO = {null}
+                        zoom = {props.zoom}
+                    />)
+        }
+    }
+
     
 
     return (
@@ -76,13 +105,7 @@ export function WindowView(props){
         <Row>
             <Col span={1}/>
             <Col span={15}>
-                <QuadsScene
-                    ir = {coloredIR()}
-                    so = {so}
-                    updateSO = {updateSO}
-                    zoom = {props.zoom}
-                    />
-                    
+                {selectQuadsScene()}
             </Col>
             <Col span={7}>
                 <Card style={{marginTop: 20}}>

@@ -125,7 +125,7 @@ function buildTiles(SIR, groupID, updateClick, click){
                 key = {tileID}
                 position={tilePos}
                 onClick={(event) => {
-                    if(updateClick != null){
+                    if(updateClick != null && click != null){
                         updateClick(new SO(SIR, groupID, tid, event.timeStamp, event.distance, click.getType()))
                     }
                 }}

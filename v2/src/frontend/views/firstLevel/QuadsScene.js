@@ -20,6 +20,7 @@ export default function QuadsScene(props) {
     
 
     function updateClick(so){
+      if(props.updateSO == null){return}
       // We can't use the state variable click instead of c, because it does not instantly update
       // which would break the functionality of updateClick()
 

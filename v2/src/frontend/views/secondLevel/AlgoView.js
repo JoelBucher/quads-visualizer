@@ -21,8 +21,6 @@ export function AlgoView(props){
 
     const buttonStyle = {width: "100%", height: 40, border: "1px solid black", margin: 5, textAlign: "left"}
 
-    const worker = new Worker('dynamicTwoHandler.js');
-
     const t = props.ir.dominoSize()
     const colors = supportedColors.slice(0, t);
     const game = symmetricPermutator(colors)
