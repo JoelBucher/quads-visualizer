@@ -3,20 +3,36 @@ import { SIR } from "../../../../../backend/classes/SIR"
 
 
 export function AddView(props){
-    const ir = props.ir
     const buttonStyle = {height: '40px', width: '100%', backgroundColor: '#4295e3', borderRadius: '10px', color: 'white', marginTop: 20}
 
-    const addSIR = (isRoot) => {
+    const addSIR = () => {
         const so = props.so
 
-        if(isRoot){
-            so.setSIR(new SIR())
-        }else{
-            const sir = so.getSIR().clone()
-            const pos = sir.getTilePosition(so.getTID())
-            sir.setPosition(pos)
-            so.setSIR(sir)
+        console.log(props.ir)
+        
+        var pos = [0,0,0]
+    
+        var positionExists = true
+
+        while(positionExists){
+            positionExists = false
+            pos = [pos[0]+1, pos[1]+1, pos[2]+1]
+
+            for(var i=0; i<props.ir.size(); i++){
+                var domPos = props.ir.get(i).position
+                if(domPos[0] == pos[0] && domPos[1] == pos[1] && domPos[2] == pos[2]){
+
+                    positionExists = true
+                }
+            }
         }
+
+        var newSIR = new SIR()
+        newSIR.position = pos
+
+        console.log(newSIR)
+
+        so.setSIR(newSIR)
         so.setTag('add')
         props.updateSO(so)
     }
@@ -26,22 +42,9 @@ export function AddView(props){
             <>
             <Button
             style={buttonStyle}
-            onClick={() => addSIR(false)}
+            onClick={() => addSIR()}
             >
-                Add Quad
-            </Button>
-            </>
-        )
-    }
-
-    function rootQuadButton(){
-        return(
-            <>
-            <Button
-            style={buttonStyle}
-            onClick={() => addSIR(true)}
-            >
-                Add First Quad
+                Add Domino
             </Button>
             </>
         )
@@ -49,8 +52,7 @@ export function AddView(props){
 
     return(
         <>
-        {ir.size()==0 ? rootQuadButton() : <></>}
-        {ir.size()>0 ? addQuadButton() : <></>}
+        {addQuadButton()}
         </>
     )
 }

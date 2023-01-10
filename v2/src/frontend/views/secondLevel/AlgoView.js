@@ -66,7 +66,7 @@ export function AlgoView(props){
                             size={"large"}
                             onClick = {() => {
                                 const maxIRset = combinationsOne(props.ir,game);
-                                const fileString = fileStringFromIR(maxIRset, "combinationsOne", props.ir)
+                                const fileString = fileStringFromIR(maxIRset, "Brute Force", props.ir)
                                 download("result.txt",fileString);
                                 }}>
                                 Brute Force
@@ -77,7 +77,7 @@ export function AlgoView(props){
                             size={"large"}
                             onClick = {() => {
                                 const maxIRset = dynamicOne(props.ir,game);
-                                const fileString = fileStringFromIR(maxIRset, "DynamicOne", props.ir)
+                                const fileString = fileStringFromIR(maxIRset, "Greedy", props.ir)
                                 download("result.txt",fileString);
                                 }}>
                                 Greedy
@@ -88,7 +88,7 @@ export function AlgoView(props){
                             size={"large"}
                             onClick = {() => {
                                 const maxIRset = dynamicTwo(props.ir,game,k);
-                                const fileString = fileStringFromIR(maxIRset, "DynamicTwo", props.ir)
+                                const fileString = fileStringFromIR(maxIRset, "Fault Budget", props.ir)
                                 download("result.txt",fileString);
                                 }}>
                                 Fault Budget

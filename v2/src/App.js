@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {SearchView} from './frontend/views/firstLevel/SearchView.js'
 import {WindowView} from './frontend/views/firstLevel/WindowView.js'
 import {ButtonBar} from './frontend/views/firstLevel/ButtonBar.js'
+import { SRtoIR } from './backend/parsers/SR-IR.js';
 import { IR } from './backend/classes/IR';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
   
   const [window, setWindow] = useState(0)
   const [zoom, setZoom] = useState(0)
-  const [ir, setIR] = useState(new IR())
+  const [ir, setIR] = useState(SRtoIR("(0,0,0/z1/yrbg)(0,0,0/x0/rgyb)(1,0,0/y2/rbyg)(1,2,0/x2/rgby)"))
 
   function setWindowCallback(w){
     setWindow(w);

@@ -98,8 +98,8 @@ export function EditView(props){
         <Segmented
             block
             options={[
-                { label: 'Edit Quad', value: 'quad' },
-                { label: 'Add Quad', value: 'tile' }]}
+                { label: 'Edit Domino', value: 'quad' },
+                { label: 'Add Domino', value: 'tile' }]}
             onChange={(value) => {setWindow(value); props.updateSO(props.so.setType(value))}}>
         </Segmented>
         {sir!=null || window=='tile' ? segmentedContent() : empty()}

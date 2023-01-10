@@ -36,6 +36,8 @@ export function WindowView(props){
             case 'add':
                 ir.add(so.getSIR())
 
+                ir.set(so.getSIR(), so.getID())
+
                 setSO(new SO())
                 break;
         }
@@ -43,14 +45,13 @@ export function WindowView(props){
     }
 
     function coloredIR(){
-        const ir = props.ir.clone()
         switch(props.window){
             case 1:
-                return(ir)
+                return(props.ir)
             case 2:
-                return(ir.removeColors())
+                return(props.ir.clone().removeColors())
             case 3:
-                return(ir)
+                return(props.ir)
         }
     }
 
@@ -83,7 +84,7 @@ export function WindowView(props){
                 return(
                     <QuadsScene
                         ir = {coloredIR()}
-                        so = {so}
+                        so = {null}
                         updateSO = {null}
                         zoom = {props.zoom}
                     />)
@@ -91,7 +92,7 @@ export function WindowView(props){
                 return(
                     <QuadsScene
                         ir = {coloredIR()}
-                        so = {so}
+                        so = {null}
                         updateSO = {null}
                         zoom = {props.zoom}
                     />)
