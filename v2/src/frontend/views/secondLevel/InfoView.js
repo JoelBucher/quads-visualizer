@@ -16,11 +16,10 @@ export function InfoView(props){
                     unique = "no"
                 }
 
-                const irCopy = props.ir.clone()
                 return (
                 <>
                     <h3 style={{marginTop: 10}}>Color Score: {props.ir.colorScore()}</h3>
-                    <h3 style={{marginTop: 10}}>Theoretical Score: {props.ir.theoreticalScore()}</h3>
+                    <h3 style={{marginTop: 10}}>Theoretical Score: {IRtoAR(props.ir.clone().removeColors()).score()}</h3>
                     <h3 style={{marginTop: 10}}>Structure Size: {props.ir.size()}</h3>
                     <h3 style={{marginTop: 10}}>Valid Coloring: {unique}</h3>
                 </>)
