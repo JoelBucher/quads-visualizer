@@ -1,4 +1,4 @@
-import { Divider, Button, Progress, Input, InputNumber, Grid, Col, Row, Popover } from 'antd';
+import { Button, InputNumber, Col, Row, Popover, Spin } from 'antd';
 import { AppstoreOutlined, BuildOutlined, InfoCircleOutlined, WarningOutlined, DashboardOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
 import { dynamicOne } from '../../../backend/algorithms/dynamicOne.js'
@@ -26,6 +26,10 @@ export function AlgoView(props){
     const t = props.ir.dominoSize()
     const colors = supportedColors.slice(0, t);
     const game = symmetricPermutator(colors)
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     function gameSelection(){
         if(t == -1){
@@ -113,7 +117,7 @@ export function AlgoView(props){
             <>
             <Row>
                 <Col span={4}>
-                    <DashboardOutlined />
+                    <Spin></Spin>
                 </Col>
                 <Col span={20}>
                     {info}
@@ -136,8 +140,11 @@ export function AlgoView(props){
                             style={buttonStyle}
                             icon={<BuildOutlined/>}
                             size={"large"}
-                            onClick = {() => {
+                            onClick = {async () => {
                                 setInfo("Computing Colorings...");
+                                setError(null);
+                                await sleep(100);
+
                                 const maxIRset = dynamicOne(props.ir,game);
                                 if(maxIRset != null){
                                     const fileString = fileStringFromIR(maxIRset, "Greedy", props.ir)
@@ -145,7 +152,7 @@ export function AlgoView(props){
                                 }else{
                                     setError("Greedy could not find any valid colorings.")
                                 }
-                                setInfo(null);
+                                setInfo(null)
                                 }}>
                                 Greedy
             </Button>
@@ -153,8 +160,11 @@ export function AlgoView(props){
                             style={buttonStyle}
                             icon={<BuildOutlined/>}
                             size={"large"}
-                            onClick = {() => {
+                            onClick = {async () => {
+                                setError(null)
                                 setInfo("Computing Colorings...");
+                                await sleep(100);
+
                                 const maxIRset = dynamicTwo(props.ir,game,k);
                                 if(maxIRset != null){
                                     const fileString = fileStringFromIR(maxIRset, "Fault Budget", props.ir)
@@ -162,7 +172,7 @@ export function AlgoView(props){
                                 }else{
                                     setError("There does not exist a valid coloring given a fault budget k<="+k+".")
                                 }
-                                setInfo(null);
+                                setInfo(null)
                                 }}>
                                 Fault Budget
                                 
