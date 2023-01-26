@@ -94,13 +94,6 @@ export class GR{
             
             //update not visited array
             notVisited = notVisited.filter(x => !res.includes(x));
-
-            console.log("--------")
-            console.log(maxID)
-            console.log(res)
-            console.log(notVisited)
-            console.log("--------")
-
             
         }
 

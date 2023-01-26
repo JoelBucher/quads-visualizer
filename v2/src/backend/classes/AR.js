@@ -6,8 +6,6 @@ export class AR {
         this.Y = Y
         this.Z = Z
 
-        //console.log("X-Y-Z" + X + "-" + Y + "-" + Z)
-
         //size is the number of quads
         this.length = length
 

@@ -7,8 +7,6 @@ export function AddView(props){
 
     const addSIR = () => {
         const so = props.so
-
-        console.log(props.ir)
         
         var pos = [0,0,0]
     
@@ -29,8 +27,6 @@ export function AddView(props){
 
         var newSIR = new SIR()
         newSIR.position = pos
-
-        console.log(newSIR)
 
         so.setSIR(newSIR)
         so.setTag('add')

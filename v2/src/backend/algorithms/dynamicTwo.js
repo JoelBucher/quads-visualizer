@@ -22,7 +22,6 @@ export function dynamicTwo(ir, game, k=0){
     // We sequentially add quads to a substructure of ir until we arrive at ir.
     // This substructure needs to be cohesive, therefore we need to run dfs on gr first
     const order = gr.order()
-    console.log(order)
 
     // define dp table (holding IRsets of possible colourings)
     var dp = new Array(ir.size())
@@ -92,7 +91,6 @@ export function dynamicTwo(ir, game, k=0){
         }
     }
 
-    console.log(dp)
     //return best result (the one with the least errors)
     for(var i=0; i<=k; i++){
         const res = dp[ir.size()-1][i]
@@ -102,5 +100,5 @@ export function dynamicTwo(ir, game, k=0){
     }
 
     console.error("no solution with given error budget found")
-    return new Array()
+    return null
 }

@@ -1,5 +1,5 @@
-import { Divider, Button, Progress, Input, InputNumber, Grid, Col, Row } from 'antd';
-import { AppstoreOutlined, BuildOutlined } from '@ant-design/icons';
+import { Divider, Button, Progress, Input, InputNumber, Grid, Col, Row, Popover } from 'antd';
+import { AppstoreOutlined, BuildOutlined, InfoCircleOutlined, WarningOutlined, DashboardOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
 import { dynamicOne } from '../../../backend/algorithms/dynamicOne.js'
 import { dynamicTwo } from '../../../backend/algorithms/dynamicTwo.js'
@@ -18,6 +18,8 @@ import { download, fileStringFromIR } from '../../../backend/file.js';
 export function AlgoView(props){
 
     const [k, setK] = useState(0)
+    const [error, setError] = useState(null)
+    const [info, setInfo] = useState(null)
 
     const buttonStyle = {width: "100%", height: 40, border: "1px solid black", margin: 5, textAlign: "left"}
 
@@ -43,24 +45,20 @@ export function AlgoView(props){
                 <>
                 <Row>
                     {colors.map((elem) =>
-                       <Col span={24/colors.length}>
+                        <>
+                        <Col span={24/colors.length}>
                             <div style={{backgroundColor: getColorHEX(elem), width: "30px", height: "30px", margin: "2px",borderRadius: "5px", }}/>
                        </Col>
+                       </>
                     )}
                 </Row>      
                 </>
             )
         }
     }
-
-    return(
-        <>  
-            <h2>Algorithms</h2>
-            <h3>Game</h3>
-            { gameSelection() }
-
-            <h3>Structure Fitting</h3>
-            <Button
+    /*
+    Brute-Force Button
+    <Button
                             style={buttonStyle}
                             icon={<AppstoreOutlined/>}
                             size={"large"}
@@ -71,14 +69,83 @@ export function AlgoView(props){
                                 }}>
                                 Brute Force
             </Button>
+    */
+   function subtitle(title,content){
+    return(
+        <Row>
+            <Col>
+                <h3>{title}</h3>
+            </Col>
+            <Col>
+                <div style={{margin: "3px", marginLeft: "10px"}}>
+                <Popover content={content} title="Game Colors">
+                    <InfoCircleOutlined/>
+                </Popover>
+                </div>
+            </Col>
+        </Row>
+        )
+   }
+
+   function displayError(){
+    if(error == null){
+        return(<></>)
+    }else{
+        return(
+            <>
+            <Row>
+                <Col span={4}>
+                    <WarningOutlined/>
+                </Col>
+                <Col span={20}>
+                    {error}
+                </Col>
+            </Row>
+            </>
+        )}
+   }
+
+   function displayInfo(){
+    if(info == null){
+        return(<></>)
+    }else{
+        return(
+            <>
+            <Row>
+                <Col span={4}>
+                    <DashboardOutlined />
+                </Col>
+                <Col span={20}>
+                    {info}
+                </Col>
+            </Row>
+            </>
+        )}
+   }
+
+    return(
+        <>  
+            <h2>Algorithms</h2>
+            {subtitle("Game", "Your structure will be colored using these colors.")}
+            
+            { gameSelection() }
+
+            {subtitle("Score Maximization", "All algorithms below search a score maximizing coloring for your given structure.")}        
+            
             <Button
                             style={buttonStyle}
                             icon={<BuildOutlined/>}
                             size={"large"}
                             onClick = {() => {
+                                setInfo("Computing Colorings...");
                                 const maxIRset = dynamicOne(props.ir,game);
-                                const fileString = fileStringFromIR(maxIRset, "Greedy", props.ir)
-                                download("result.txt",fileString);
+                                if(maxIRset != null){
+                                    const fileString = fileStringFromIR(maxIRset, "Greedy", props.ir)
+                                    download("result.txt",fileString);
+                                }else{
+                                    setError("Greedy could not find any valid colorings.")
+                                }
+                                setInfo(null);
                                 }}>
                                 Greedy
             </Button>
@@ -87,18 +154,35 @@ export function AlgoView(props){
                             icon={<BuildOutlined/>}
                             size={"large"}
                             onClick = {() => {
+                                setInfo("Computing Colorings...");
                                 const maxIRset = dynamicTwo(props.ir,game,k);
-                                const fileString = fileStringFromIR(maxIRset, "Fault Budget", props.ir)
-                                download("result.txt",fileString);
+                                if(maxIRset != null){
+                                    const fileString = fileStringFromIR(maxIRset, "Fault Budget", props.ir)
+                                    download("result.txt",fileString);
+                                }else{
+                                    setError("There does not exist a valid coloring given a fault budget k<="+k+".")
+                                }
+                                setInfo(null);
                                 }}>
                                 Fault Budget
                                 
             </Button>
-            <InputNumber
-                min={0}
-                defaultValue={0}
-                onChange={(value) => setK(value)}
-            />
+            <Row>
+                <Col>
+                    <div style={{marginTop: "5px", marginRight: "10px"}}>
+                        <p>Budget (k):</p>
+                    </div>
+                </Col>
+                <Col>
+                    <InputNumber
+                    min={0}
+                    defaultValue={0}
+                    onChange={(value) => setK(value)}
+                />
+                </Col>
+            </Row>
+            {displayInfo()}
+            {displayError()}
         </>
     )
 } 
