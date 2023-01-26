@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/quads-visualizer/static/css/main.02df2c70.css",
-    "main.js": "/quads-visualizer/static/js/main.3239169f.js",
+    "main.js": "/quads-visualizer/static/js/main.472c3f04.js",
     "static/js/787.19a5b47a.chunk.js": "/quads-visualizer/static/js/787.19a5b47a.chunk.js",
     "index.html": "/quads-visualizer/index.html",
     "main.02df2c70.css.map": "/quads-visualizer/static/css/main.02df2c70.css.map",
-    "main.3239169f.js.map": "/quads-visualizer/static/js/main.3239169f.js.map",
+    "main.472c3f04.js.map": "/quads-visualizer/static/js/main.472c3f04.js.map",
     "787.19a5b47a.chunk.js.map": "/quads-visualizer/static/js/787.19a5b47a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.02df2c70.css",
-    "static/js/main.3239169f.js"
+    "static/js/main.472c3f04.js"
   ]
 }
