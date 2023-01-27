@@ -1,12 +1,12 @@
 import { Button } from "antd"
 import { SIR } from "../../../../../backend/classes/SIR"
-
+import { SO } from "../../../../../frontend/classes/SO"
 
 export function AddView(props){
     const buttonStyle = {height: '40px', width: '100%', backgroundColor: '#4295e3', borderRadius: '10px', color: 'white', marginTop: 20}
 
     const addSIR = () => {
-        const so = props.so
+        //const so = props.so
         
         var pos = [0,0,0]
     
@@ -28,6 +28,7 @@ export function AddView(props){
         var newSIR = new SIR()
         newSIR.position = pos
 
+        var so = new SO()
         so.setSIR(newSIR)
         so.setTag('add')
         props.updateSO(so)

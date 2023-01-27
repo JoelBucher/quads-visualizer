@@ -11,6 +11,8 @@ import { mergeCheck } from "./mergeCheck.js"
 import { IRtoSR } from "../parsers/IR-SR.js"
 
 export function dynamicOne(ir, game, progressCallback=null){
+    console.log(ir)
+    
     var gr = ARtoGR(IRtoAR(ir))
 
     // We sequentially add quads to a substructure of ir until we arrive at ir.

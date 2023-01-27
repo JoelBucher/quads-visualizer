@@ -6,7 +6,7 @@ export class SIR {
     static structure    //{colors: ['x','x','x','x']}
     static status       //'success'
 
-    constructor(pos = [0,0,0], rot = {axis: 'x', degree: 0}, str={colors: ['x','x','x','x']}, status = 'success') {
+    constructor(pos = [0,0,0], rot = {axis: 'x', degree: '0'}, str={colors: ['x','x','x','x']}, status = 'success') {
         this.position = pos;
         this.rotation = rot;
         this.structure = str;
