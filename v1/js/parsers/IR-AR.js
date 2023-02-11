@@ -5,7 +5,6 @@ import {AR} from '../classes/AR.js';
 
 export function IRtoAR(IR){
     //initialize array
-    //console.log("IR to AR called")
     var array = new AR(IR.dimension[0], IR.dimension[1], IR.dimension[2], IR.size())
 
     //set AR translation offsets

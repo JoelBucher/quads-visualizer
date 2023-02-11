@@ -15,7 +15,6 @@ export function dynamicOne(ir, printProgress = false){
     // We sequentially add quads to a substructure of ir until we arrive at ir.
     // This substructure needs to be cohesive, therefore we need to run bfs on gr first
     const order = gr.bfs()
-    console.log(order)
 
     // define dp table (holding IRsets of possible colourings)
     var dp = new Array(ir.size())
@@ -24,8 +23,6 @@ export function dynamicOne(ir, printProgress = false){
     var structure = new IR()
     structure.add(ir.get(0))
     dp[0] = combinationsOne(structure,false)
-
-    console.log("size "+order.length)
 
     for(var i=1; i<order.length; i++){
         const newSIR = ir.get(order[i])

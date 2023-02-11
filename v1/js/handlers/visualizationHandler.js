@@ -7,7 +7,6 @@ export function visualizationHandler(input){
     const sceneObject = setup()
 
     var IR = SRtoIR(input)
-    console.log(IR)
 
     const AR = IRtoAR(IR);
     

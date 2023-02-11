@@ -5,7 +5,6 @@ import {download, fileStringFromIR} from '../file.js'
 export function combinationsOneHandler(input){
     const ir = SRtoIR(input);
     
-    console.log("computing...")
     const optIRSet = combinationsOne(ir)
 
     const fileString = fileStringFromIR(optIRSet, "combinationOne", ir)

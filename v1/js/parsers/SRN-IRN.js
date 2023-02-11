@@ -6,7 +6,6 @@ export function SRNtoIRN(input){
     const list = extractValues(input, regexRule)
     var output = new IRN()
     for(var i=0; i<list.length; i++){
-        console.log(SRNtoSIRN(list[i], i))
         output.add(SRNtoSIRN(list[i], i))
     }
     return output

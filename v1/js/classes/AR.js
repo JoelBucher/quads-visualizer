@@ -7,8 +7,6 @@ export class AR {
         this.Y = Y
         this.Z = Z
 
-        //console.log("X-Y-Z" + X + "-" + Y + "-" + Z)
-
         //size is the number of quads
         this.length = length
 
@@ -201,7 +199,6 @@ export class AR {
                     corner[d] = 0
                 }
             }
-            console.log(corner)
             const cornerCube = this.getCube(corner[0], corner[1], corner[2])
             corners[i] = cornerCube
         }

@@ -24,10 +24,8 @@ export function mergeCheck(IRsets, printProgress = true, IRtransformers = getDef
         sizes.push(s)
     }
 
-    console.log(sizes)
     
     for(var i=0; i<sizes[sizes.length-1]; i++){
-        console.log("sizes[sizes] "+sizes[sizes.length-1])
 
         // compute all combinations of IR's from different IR sets
         const combination = Array(IRsets.length)
