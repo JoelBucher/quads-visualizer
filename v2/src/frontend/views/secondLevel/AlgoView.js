@@ -55,7 +55,68 @@ export function AlgoView(props){
                        </Col>
                        </>
                     )}
-                </Row>      
+                </Row>  
+
+
+                {subtitle("Score Maximization", "All algorithms below search a score maximizing coloring for your given structure.")}        
+            
+            <Button
+                            style={buttonStyle}
+                            icon={<BuildOutlined/>}
+                            size={"large"}
+                            onClick = {async () => {
+                                setInfo("Computing Colorings...");
+                                setError(null);
+                                await sleep(100);
+
+                                const maxIRset = dynamicOne(props.ir,game);
+                                if(maxIRset.length != 0){
+                                    const fileString = fileStringFromIR(maxIRset, "Greedy", props.ir)
+                                    download("result.txt",fileString);
+                                }else{
+                                    setError("There do not exist any valid colorings for your structure.")
+                                }
+                                setInfo(null)
+                                }}>
+                                Greedy
+            </Button>
+            <Button
+                            style={buttonStyle}
+                            icon={<BuildOutlined/>}
+                            size={"large"}
+                            onClick = {async () => {
+                                setError(null)
+                                setInfo("Computing Colorings...");
+                                await sleep(100);
+
+                                const maxIRset = dynamicTwo(props.ir,game,k);
+                                if(maxIRset != null){
+                                    const fileString = fileStringFromIR(maxIRset, "Fault Budget", props.ir)
+                                    download("result.txt",fileString);
+                                }else{
+                                    setError("There does not exist a valid coloring given a fault budget k<="+k+".")
+                                }
+                                setInfo(null)
+                                }}>
+                                Fault Budget
+                                
+            </Button>
+            <Row>
+                <Col>
+                    <div style={{marginTop: "5px", marginRight: "10px"}}>
+                        <p>Budget (k):</p>
+                    </div>
+                </Col>
+                <Col>
+                    <InputNumber
+                    min={0}
+                    defaultValue={0}
+                    onChange={(value) => setK(value)}
+                />
+                </Col>
+            </Row>
+            {displayInfo()}
+            {displayError()}
                 </>
             )
         }
@@ -133,66 +194,6 @@ export function AlgoView(props){
             {subtitle("Game", "Your structure will be colored using these colors.")}
             
             { gameSelection() }
-
-            {subtitle("Score Maximization", "All algorithms below search a score maximizing coloring for your given structure.")}        
-            
-            <Button
-                            style={buttonStyle}
-                            icon={<BuildOutlined/>}
-                            size={"large"}
-                            onClick = {async () => {
-                                setInfo("Computing Colorings...");
-                                setError(null);
-                                await sleep(100);
-
-                                const maxIRset = dynamicOne(props.ir,game);
-                                if(maxIRset != null){
-                                    const fileString = fileStringFromIR(maxIRset, "Greedy", props.ir)
-                                    download("result.txt",fileString);
-                                }else{
-                                    setError("Greedy could not find any valid colorings.")
-                                }
-                                setInfo(null)
-                                }}>
-                                Greedy
-            </Button>
-            <Button
-                            style={buttonStyle}
-                            icon={<BuildOutlined/>}
-                            size={"large"}
-                            onClick = {async () => {
-                                setError(null)
-                                setInfo("Computing Colorings...");
-                                await sleep(100);
-
-                                const maxIRset = dynamicTwo(props.ir,game,k);
-                                if(maxIRset != null){
-                                    const fileString = fileStringFromIR(maxIRset, "Fault Budget", props.ir)
-                                    download("result.txt",fileString);
-                                }else{
-                                    setError("There does not exist a valid coloring given a fault budget k<="+k+".")
-                                }
-                                setInfo(null)
-                                }}>
-                                Fault Budget
-                                
-            </Button>
-            <Row>
-                <Col>
-                    <div style={{marginTop: "5px", marginRight: "10px"}}>
-                        <p>Budget (k):</p>
-                    </div>
-                </Col>
-                <Col>
-                    <InputNumber
-                    min={0}
-                    defaultValue={0}
-                    onChange={(value) => setK(value)}
-                />
-                </Col>
-            </Row>
-            {displayInfo()}
-            {displayError()}
         </>
     )
 } 

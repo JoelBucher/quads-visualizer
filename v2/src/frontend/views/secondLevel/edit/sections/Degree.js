@@ -4,7 +4,7 @@ export function EditDegree(props){
     const sir = props.so.getSIR()
 
     const changeDegree = (degree) => {
-        sir.rotation.degree = degree
+        sir.rotation.degree = degree.toString()
         props.so.setSIR(sir)
         props.updateSO(props.so)
     }

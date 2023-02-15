@@ -11,7 +11,6 @@ import { mergeCheck } from "./mergeCheck.js"
 import { IRtoSR } from "../parsers/IR-SR.js"
 
 export function dynamicOne(ir, game, progressCallback=null){
-    console.log(ir)
     
     var gr = ARtoGR(IRtoAR(ir))
 
@@ -44,6 +43,5 @@ export function dynamicOne(ir, game, progressCallback=null){
         structure.add(newSIR)
         console.log("progress: "+(i/ir.size()))
     }
-
     return dp[ir.size()-1]
 }
