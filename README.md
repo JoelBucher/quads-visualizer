@@ -6,6 +6,6 @@ npm start
 ```
 The webapp should now be available on 'localhost:3000'.
 
-# Deployed Version
+## Deployed Version
 A deployed verion of the app can be found here
 https://joelbucher.github.io/quads-visualizer/
